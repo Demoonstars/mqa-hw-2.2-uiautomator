@@ -50,7 +50,7 @@ class ChangeTextTest {
     fun testChangeText() {
         val packageName = MODEL_PACKAGE
         waitForPackage(packageName)
-        device.findObject(By.res(packageName, "userInput")).text = textToSet
+        device.wait(Until.findObject(By.res(packageName, "userInput")), TIMEOUT).text = textToSet
         device.findObject(By.res(packageName, "buttonChange")).click()
         val result = device.findObject(By.res(packageName, "textToBeChanged")).text
         assertEquals(result, textToSet)
@@ -60,7 +60,7 @@ class ChangeTextTest {
     fun testEmptyInputDoesNotChangeText() {
         val packageName = MODEL_PACKAGE
         waitForPackage(packageName)
-        device.findObject(By.res(packageName, "userInput")).text = "   "
+        device.wait(Until.findObject(By.res(packageName, "userInput")), TIMEOUT).text = "   "
         device.findObject(By.res(packageName, "buttonChange")).click()
         val result = device.findObject(By.res(packageName, "textToBeChanged")).text
         assertEquals("Hello UiAutomator!", result)
@@ -70,7 +70,7 @@ class ChangeTextTest {
     fun testOpenTextInAnotherActivity() {
         val packageName = MODEL_PACKAGE
         waitForPackage(packageName)
-        device.findObject(By.res(packageName, "userInput")).text = textToSet
+        device.wait(Until.findObject(By.res(packageName, "userInput")), TIMEOUT).text = textToSet
         device.findObject(By.res(packageName, "buttonActivity")).click()
         device.wait(Until.hasObject(By.res(packageName, "text")), TIMEOUT)
         val result = device.findObject(By.res(packageName, "text")).text
